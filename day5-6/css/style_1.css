@@ -1,0 +1,17 @@
+ul.info{
+    display:block;
+    overflow:hidden;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+ul.info li{
+    list-style: none;
+    display: inline;
+    margin-right: 2%;
+}
+
+.blockstyle{
+    display: block;
+}
