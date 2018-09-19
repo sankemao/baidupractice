@@ -9,11 +9,21 @@ body{
     height: 100%;
 }
 
+hr{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border: none;
+    border-top: 1px solid #e7e7e7;
+    overflow: hidden;
+}
+
 .hd{
     width: 100%;
     height: 990px;
-    background-image: url("../images/header_bg.png");
+    background: url("../images/header_bg.png") center;
     position: relative;
+    background-size: cover;
 }
 
 .hd .header-title{
@@ -22,7 +32,7 @@ body{
     font-size: 62px;
     font-family: "montserrat";
     text-align: center;
-    padding-top: 210px;
+    padding-top: 220px;
 }
 
 .hd .header-describe{
@@ -31,5 +41,263 @@ body{
     font-size: 18px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
+    margin-top: 60px;
 }
+
+.header-regist{
+    width: 900px;
+    height: 260px;
+    border: 1px solid rgba(255, 255, 255, .5);
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-regist p{
+    text-align: center;
+    color: white;
+}
+
+.header-regist p:nth-of-type(1){
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+.header-regist p:nth-of-type(2){
+    font-size: 16px;
+    margin-top: 10px;
+    color: #82817d;
+    margin-bottom: 50px;
+}
+
+.header-regist form{
+    width: 100%;
+    text-align: center;
+}
+
+.header-regist input{
+    border: 1px solid rgba(255, 255, 255, .5);
+    background: transparent;
+    width: 290px;
+    height: 50px;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+    padding-left: 18px;
+}
+
+.header-regist button{
+    width: 125px;
+    height: 50px;
+    font-weight: bold;
+    background-color:white;
+    border:rgb(119, 113, 113) 1px solid;
+    color: black;
+    border-radius: 4px;
+    letter-spacing: 0.2em;
+}
+
+.page1{
+    width: 100%;
+    height:700px;
+    background: white;
+}
+
+.tip{
+    margin-top: 85px;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-align: center;
+}
+
+.page1 >.title{
+    font-size: 40px;
+    text-align: center;
+    width: 680px;
+    font-family: STXihei;
+    margin: 20px auto 0;
+    line-height: 55px;
+}
+
+.flex-list{
+    width: 960px;
+    height: 400px;
+    margin: 100px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.flex-list info{
+    margin: 40px 0 40px 0;
+}
+
+.flex-list img{
+    float: left;
+    margin-right: 10px;
+}
+
+.flex-list .info p:nth-of-type(1){
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 400px;
+    overflow: hidden;
+}
+
+.flex-list .info p:last-child{
+    max-width: 400px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.page2{
+    width: 100%;
+    height: 800px;
+    background-image: url("../images/page2-bg.png");
+    background-size: cover;
+}
+.shadow{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    position: relative;
+}
+
+.ipad{
+    width: 650px;
+    height: 600px;
+    margin: auto 0 auto 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding:30px 0 30px 0;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.ipad img{
+    position: absolute;
+    right: 0px;
+}
+
+.ipad #home{
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 8px;
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0 auto 0;
+}
+
+.page2 .left{
+    width: 960px;
+    height: 440px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.page2 p:nth-of-type(1){
+    width: 400px;
+    font-size: 42px;
+    color:white;
+}
+
+.page2 p:nth-of-type(2){
+    margin-top: 30px;
+    width: 450px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, .8);
+}
+
+.page2 button{
+    margin-top: 50px;
+    margin-right: 10px;
+    width: 235px;
+    height: 60px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, .5);
+}
+
+.page2 button:nth-of-type(1){
+    background: white;
+    color: black;
+}
+
+.page2 button:nth-of-type(2) {
+    background:transparent;
+    color: white;
+}
+
+.page3 {
+    width: 960px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.page3 > p{
+    margin-top: 100px;
+    margin-bottom: 80px;
+    text-align: center;
+    font-size: 40px;
+    color: black;
+}
+
+.page3 > div{
+    display: flex;
+}
+
+.page3 .flex-item{
+    width: 33%;
+    text-align: center;
+}
+
+.page3 .flex-item p{
+    margin-top: 20px;
+    display: inline-block;
+    width: 82%;
+    line-height: 25px;
+    color: rgba(0, 0, 0, .5);
+}
+
+.page4 {
+    margin: 0 auto;
+    width: 960px;
+    height: 900px;
+}
+
+.page4 div{
+    margin-top: 80px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.page4 .img-left{
+    float: left;
+    margin-right: 30px;
+}
+
+.page4 .img-right {
+    float: right;
+}
+
+.page4 h3{
+    margin-top: 80px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.page4 > p{
+
+}
+
+
