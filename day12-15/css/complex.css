@@ -1,0 +1,98 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    min-width: 1200px;
+    height: 100%;
+}
+
+.left-menu{
+    display: flex;
+    width: 350px;
+}
+
+.menu-primary{
+    flex: 0 0 100px;
+    background: #1d2531;
+}
+
+.menu-second{
+    flex: 0 0 250px;
+    background: #222c3c;
+}
+
+.right-content{
+    display: flex;
+    flex: auto;
+    flex-direction: column; 
+}
+
+.right-content .content-header {
+    display: flex;
+    flex: 0 0 80px;
+    border-bottom: 1px solid #e6e9ec;
+}
+
+.content-container{
+    flex: auto;
+    display: flex;
+}
+
+.content-left{
+    flex: 0 0 400px;
+    border-right: 1px solid #e6e9ec;
+}
+
+.content-right{
+    flex: auto;
+}
+
+/**************************************************************/
+
+.menu-primary{
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-primary ul{
+    flex: 1;
+    list-style: none;
+}
+
+.menu-primary button {
+    display: block;
+    margin: 20px auto 0;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+.menu-primary li:nth-of-type(1) button{
+background: linear-gradient(to bottom, #2ca1f8, #1a91eb);
+}
+.menu-primary li:nth-of-type(2) button {
+background: linear-gradient(to bottom, #9a8be3, #815de6);
+}
+.menu-primary li:nth-of-type(3) button {
+    background: linear-gradient(to bottom, #f15035, #cd290c);
+}
+.menu-primary li:nth-of-type(4) button {
+    background: transparent;
+    border: 3px solid rgba(255, 255, 255, .1);
+}
+
+.menu-primary p{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
