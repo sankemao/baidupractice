@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>IFE ECMAScript</title>
+</head>
+
+<body>
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <script>
+        var result = document.getElementById("result");
+        document.getElementById("add-btn").onclick = () => {
+            num1 = Number(document.getElementById("first-number").value);
+            num2 = Number(document.getElementById("second-number").value);
+            if (isNaN(num1) || isNaN(num2)){
+                alert("输入数字不合法");
+            } else{
+                result.innerHTML = "运算结果:" + (num1 + num2);
+            }
+        }
+
+        document.getElementById("minus-btn").onclick = () =>{
+            try {
+                aleddt("哈哈哈");
+            } catch (error) {
+                alert("发生了异常");
+            }
+        }
+       
+    </script>
+</body>
+
+</html>

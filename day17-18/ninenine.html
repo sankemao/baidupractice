@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <p id="result"></p>
+    <script>
+        var result = document.getElementById("result");
+        (function print() {
+            var resultStr = "";
+            for(var m = 1; m <= 9; m++){
+                for(var n = 1; n <= m; n++){
+                    resultStr += m + "*" + n + "=" + m*n;
+                    if(n == m){
+                        resultStr += "<br>";
+                    }
+                    console.log("执行了");
+                }
+            }
+
+            result.innerHTML = resultStr;
+        })();
+    </script>
+</body>
+</html>
