@@ -8,6 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script> -->
+    <style type="text/css">
+        #submit-btn {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        #submit-btn:hover {
+            background: blue;
+            width: 250px;
+            background-color: blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,11 +31,16 @@
         var btnSubmit = document.querySelector("#submit-btn");
         var inputDom = document.querySelector("#name");
 
-        btnSubmit.onclick = e => console.log(inputDom.value);
+        // btnSubmit.onclick = e => console.log(inputDom.value);
+
         inputDom.onkeydown = e => {
-            if(e.keyCode == 27) inputDom.value = "";
-            if(e.keyCode == 13) console.log(inputDom.value);
+            if (e.keyCode == 27) inputDom.value = "";
+            if (e.keyCode == 13) console.log(inputDom.value);
         };
+
+        btnSubmit.onclick = () => {btnSubmit.style.backgroundColor = "black";
+            btnSubmit.style.width = "300px";
+        }
     </script>
 
 </body>
