@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Send a mail to your lover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <style type="text/css">
+        input {
+            margin: 0;
+            padding: 0;
+            border: 1px solid blue;
+            width: 203px;
+            height: 26px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            width: 203px;
+            border: 1px solid blue;
+            list-style: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input class="mail-input" type="text">
+        <ul class="mail-sug">
+
+        </ul>
+    </div>
+
+    <script>
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+
+        var ulDom = document.querySelector(".mail-sug");
+        var inputDom = document.querySelector(".mail-input");
+        
+        //1.获取输入内容
+        inputDom.oninput = function (event) {
+            createLis(this.value.trim());
+        }
+
+        //创建下拉提示列表项
+        function createLis(inputContent) {
+            var lisDom = document.querySelectorAll(".mail-sug li");
+            //移除原有的列表
+            Array.prototype.slice.call(lisDom, 0).forEach(element => {
+                element.remove();
+            });
+            
+            for(var i = 0; i < postfixList.length; i++){
+                var liDom = document.createElement("li");
+                var node = document.createTextNode(inputContent + "@" + postfixList[i]);
+                liDom.appendChild(node);
+                ulDom.appendChild(liDom);
+            }
+        }
+        
+        //移除下拉提示
+        function reomoveLis() {
+            ulDom.removeChild();
+        }
+        
+        // var createSugLis = () => 
+
+    </script>
+</body>
+
+</html>
