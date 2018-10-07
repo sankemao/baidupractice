@@ -43,19 +43,34 @@
 
 <body>
     <div>
-        <input class="mail-input" type="text">
+        <input class="mail-input" type="text" placeholder="请输入您的邮箱">
         <ul class="mail-sug">
 
         </ul>
     </div>
 
     <script>
-        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        const postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        const ulDom = document.querySelector(".mail-sug");
+        const inputDom = document.querySelector(".mail-input");
+        const reg = /(^.+)@(.*)/;
 
-        var ulDom = document.querySelector(".mail-sug");
-        var inputDom = document.querySelector(".mail-input");
+        //条目点击事件
+        ulDom.onclick = (event) => {
+            var e = event || window.event;
+            var source = event.target || event.srcElement;
+            if (source.nodeName.toLowerCase() == 'li') {
+                //value为标签的value值，而innerHTML为尖括号之间的值
+                inputDom.value = source.innerHTML;
+                reomoveLis();
+            }
+        }
 
-        var reg = /(^.+)@(.*)/;
+        //移除下拉提示
+        function reomoveLis() {
+            ulDom.remove();
+        }
+
         //1.获取输入内容
         inputDom.oninput = function (event) {
             var temp = this.value.trim();
@@ -69,22 +84,11 @@
             }
         }
 
-        ulDom.onclick = (event) => {
-            var e = event||window.event;
-            var source = event.target || event.srcElement;
-            if(source.nodeName.toLowerCase() == 'li'){
-                inputDom.value = source.value;
-                reomoveLis();
-            }
-        }
-
         //创建下拉提示列表
         function createLis(inputLeft, inputRight) {
             var lisDom = document.querySelectorAll(".mail-sug li");
             //移除原有的列表
-            Array.prototype.slice.call(lisDom, 0).forEach(element => {
-                element.remove();
-            });
+            Array.prototype.slice.call(lisDom, 0).forEach(element => element.remove());
 
             if (inputRight && inputRight.trim()) {
                 var result = postfixList.filter(item => {
@@ -93,7 +97,7 @@
                         return item;
                     }
                 });
-                if(!result.length){
+                if (!result.length) {
                     postfixList.forEach(item => createLi(inputLeft, item));
                 }
             } else if (inputLeft && inputLeft.trim()) {
@@ -101,19 +105,15 @@
                 postfixList.forEach(item => createLi(inputLeft, item));
             }
         }
-        
+
         //创建下拉列表的条目
-        function createLi(inputLeft, right){
+        function createLi(inputLeft, right) {
             var liDom = document.createElement("li");
             var node = document.createTextNode(inputLeft + "@" + right);
             liDom.appendChild(node);
             ulDom.appendChild(liDom);
         }
 
-        //移除下拉提示
-        function reomoveLis() {
-            ulDom.remove
-        }
     </script>
 </body>
 
