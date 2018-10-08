@@ -141,7 +141,7 @@
                     highLightLi(liDoms, preIndex == liDoms.length - 1 ? 0 : preIndex + 1);
                 },
                 //直接高亮preIndex的选项
-                activePre: function () {
+                activePreIndex: function () {
                     var liDoms = ulDom.querySelectorAll('li');
                     highLightLi(liDoms, preIndex);
                 },
@@ -189,7 +189,7 @@
             }
 
             //高亮
-            ops.activePre();
+            ops.activePreIndex();
         }
 
         //创建下拉列表的条目 
