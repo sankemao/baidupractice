@@ -25,6 +25,7 @@
             width: 240px;
             border: 1px solid blue;
             list-style: none;
+            display: none;
         }
 
         li {
@@ -37,6 +38,12 @@
 
         li:hover {
             background-color: #c5ddeb;
+            color: white;
+        }
+
+        li.active {
+            background-color: #c5ddeb;
+            color: white;
         }
     </style>
 </head>
@@ -45,7 +52,6 @@
     <div>
         <input class="mail-input" type="text" placeholder="请输入您的邮箱">
         <ul class="mail-sug">
-
         </ul>
     </div>
 
@@ -62,19 +68,94 @@
             if (source.nodeName.toLowerCase() == 'li') {
                 //value为标签的value值，而innerHTML为尖括号之间的值
                 inputDom.value = source.innerHTML;
-                reomoveLis();
+                toggle(false);
             }
         }
 
-        //移除下拉提示
-        function reomoveLis() {
-            ulDom.remove();
-        }
+        //下拉提示是否显示
+        var toggle = (function () {
+            var showStatus = false;
+            return function toggleInner(isShow) {
+                //函数运行在它们被定义的作用域中。
+                if (showStatus != isShow) {
+                    showStatus = isShow;
+                    ulDom.style.display = isShow ? 'block' : 'none';
+                }
+                //关闭下拉列表时，清除选中的Index;
+                if(!isShow){
+                    ops.clearPreIndex();
+                }
+            }
+        })();
+
+        //监听键盘事件
+        inputDom.addEventListener('keyup', function (event) {
+            var event = event || window.event;
+            var target = event.target || event.srcElement;
+            switch (event.keyCode) {
+                case 13: //回车键
+                    ops.enter();
+                    break;
+                case 27: //esc
+                    inputDom.select();
+                    break;
+                case 38: //up
+                    ops.up();
+                    break;
+                case 40: //down
+                    ops.down();
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        var ops = (function (params) {
+            var preIndex = 0;
+
+            function highLightLi(liDoms, newIndex) {
+                if (liDoms.length <= 0) return;
+                //当只有一个选项时，直接高亮
+                if (liDoms.length == 1) {
+                    liDoms[0].classList.add('active');
+                    return;
+                }
+                liDoms[preIndex].classList = '';
+                liDoms[newIndex].classList.add('active');
+                preIndex = newIndex;
+            };
+
+            return {
+                enter: function () {
+                    var liDoms = ulDom.querySelectorAll('li');
+                    inputDom.value = liDoms[preIndex].innerHTML;
+                    //关闭下拉提示
+                    toggle(false);
+                },
+                up: function () {
+                    var liDoms = ulDom.querySelectorAll('li');
+                    highLightLi(liDoms, preIndex == 0 ? liDoms.length - 1 : preIndex - 1);
+                },
+                down: function () {
+                    var liDoms = ulDom.querySelectorAll('li');
+                    highLightLi(liDoms, preIndex == liDoms.length - 1 ? 0 : preIndex + 1);
+                },
+                //直接高亮preIndex的选项
+                activePre: function () {
+                    var liDoms = ulDom.querySelectorAll('li');
+                    highLightLi(liDoms, preIndex);
+                },
+
+                clearPreIndex : function () {
+                    preIndex = 0;
+                }
+            }
+        })();
 
         //1.获取输入内容
         inputDom.oninput = function (event) {
             var temp = this.value.trim();
-
+            toggle(temp.length > 0);
             if (temp.indexOf('@') != -1) {
                 //包含@
                 temp = reg.exec(temp);
@@ -86,34 +167,40 @@
 
         //创建下拉提示列表
         function createLis(inputLeft, inputRight) {
-            var lisDom = document.querySelectorAll(".mail-sug li");
+            var liDoms = document.querySelectorAll(".mail-sug li");
             //移除原有的列表
-            Array.prototype.slice.call(lisDom, 0).forEach(element => element.remove());
+            Array.prototype.slice.call(liDoms, 0).forEach(li => li.remove());
 
             if (inputRight && inputRight.trim()) {
+                //@右边输入了，且输入的内容出现在postflixList中
                 var result = postfixList.filter(item => {
                     if (item.indexOf(inputRight) == 0) {
-                        createLi(inputLeft, item);
+                        createLi(inputLeft, item, true);
                         return item;
                     }
                 });
+                //postflixList中没匹配上
                 if (!result.length) {
                     postfixList.forEach(item => createLi(inputLeft, item));
                 }
             } else if (inputLeft && inputLeft.trim()) {
-                //@右边没有输入或者右边输入了，点没匹配上
+                //@右边没有输入或者右边输入了，但没匹配上
                 postfixList.forEach(item => createLi(inputLeft, item));
             }
+
+            //高亮
+            ops.activePre();
         }
 
-        //创建下拉列表的条目
+        //创建下拉列表的条目 
+        //@param inputLeft      @左边文字
+        //@param inputRight     @右边文字
         function createLi(inputLeft, right) {
             var liDom = document.createElement("li");
             var node = document.createTextNode(inputLeft + "@" + right);
             liDom.appendChild(node);
             ulDom.appendChild(liDom);
         }
-
     </script>
 </body>
 
