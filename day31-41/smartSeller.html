@@ -1,11 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./sellerCss.css">
 </head>
+
 <body>
+    <header>
+
+    </header>
+    <main>
+        <div class="select" id="region-wrapper">
+            <h1>地区</h1>
+            <form>
+
+                <input type="radio" name="region-select" id="east" value="华东">华东
+                <input type="radio" name="region-select" id="south" value="华南">华南
+                <input type="radio" name="region-select" id="north" value="华北">华北
+            </form>
+        </div>
+        <div class="select" id="product-wrapper">
+            <h1>商品</h1>
+            <form>
+                <input type="radio" name="product-select" id="phone" value="手机">手机
+                <input type="radio" name="product-select" id="notebook" value="笔记本">笔记本
+                <input type="radio" name="product-select" id="voicebox" value="智能音箱">智能音箱
+            </form>
+        </div>
+
+        <div id="table-wrapper">
+            <!-- <table id="table">
+                <thead>
+                    <tr>
+                        <th colspan="2">商品</th>
+                        <th colspan="2">地区</th>
+                        <th>1月</th>
+                        <th>2月</th>
+                        <th>3月</th>
+                        <th>4月</th>
+                        <th>5月</th>
+                        <th>6月</th>
+                        <th>7月</th>
+                        <th>8月</th>
+                        <th>9月</th>
+                        <th>10月</th>
+                        <th>11月</th>
+                        <th>12月</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td data-label="商品" colspan="2">data</td>
+                        <td data-label="商品" colspan="2">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                        <td data-label="商品">data</td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="./datasource.js"></script>
+    <script src="./sellerJs.js"></script>
 </body>
+
 </html>
