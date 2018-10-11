@@ -39,7 +39,7 @@ let sourceData = [{
 
 //根据checkbox勾选过滤数据
 function getData(checkedValuesFilter) {
-    return sourceData.filter((item, index, self) => {-1
+    return sourceData.filter((item, index, self) => {
         return checkedValuesFilter.indexOf(item.product) != -1 && checkedValuesFilter.indexOf(item.region) != -1;
     });
 }

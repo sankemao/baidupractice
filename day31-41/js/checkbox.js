@@ -12,6 +12,7 @@ function handleCheckbox(parent) {
     //CheckBox点击事件
     parent.onclick = (e) => {
         let target = e.target;
+        console.log(target);
         if (target.getAttribute('type') === 'checkbox') {
             let checkCount = 0;
             let type = target.getAttribute('check-type');

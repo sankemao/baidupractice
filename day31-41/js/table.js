@@ -1,6 +1,10 @@
-let tableWrapper = document.querySelector('#table-wrapper');
+/**
+ * 渲染表格
+ * @param {*} tableWrapper 
+ * @param {*} data 
+ */
 
-function renderTable(data) {
+function renderTable(tableWrapper, data) {
     tableWrapper.textContent = '';
     let table = document.createElement('table');
     table.setAttribute('id', 'table');
@@ -45,8 +49,28 @@ function renderTable(data) {
         table.appendChild(tr);
     });
 
-    tableWrapper.appendChild(table);
+    //当地区选择一个，商品多个的时候，交换第一和第二列。
+    let areaWrapper = document.querySelector('#area-wrapper');
+    let goodsWrapper = document.querySelector('#goods-wrapper');
+    let areaSel = areaWrapper.querySelectorAll("input[check-type='single']");
+    let goodsSel = goodsWrapper.querySelectorAll("input[check-type='single']");
+    let areaSelCount = 0;
+    for (let i = 0; i < areaSel.length; i++) {
+        if (areaSel[i].checked) areaSelCount++;
+    }
+    let goodsSelCount = 0;
+    for (let i = 0; i < goodsSel.length; i++) {
+        if (goodsSel[i].checked) goodsSelCount++;
+    }
+    if (areaSelCount === 1 && goodsSelCount !== 1) {
+        Array.prototype.slice.call(table.rows, 0).forEach(row => {
+            let temp = row.cells[0].innerHTML;
+            row.cells[0].innerHTML = row.cells[1].innerHTML;
+            row.cells[1].innerHTML = temp;
+        });
+    }
 
+    tableWrapper.appendChild(table);
     mergeCell(table, 1, 0); //从第1行开始检查合并， 排除了thead
 }
 
@@ -59,7 +83,7 @@ function renderTable(data) {
  * @param {*} col 指定的列数
  */
 function mergeCell(table, startRow, col) {
-    console.log('执行了');
+    console.log('执行了mergeCell');
     let startRowDom = table.rows[startRow];
 
     for (let i = startRow; i < table.rows.length - 1; i++) {
