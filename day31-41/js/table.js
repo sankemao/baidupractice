@@ -32,7 +32,7 @@ function renderTable(tableWrapper, data) {
     data.forEach(sourceItem => {
         let tr = document.createElement('tr');
         Object.keys(sourceItem).forEach(key => {
-            let value = sourceItem[key]; //'手机'	'华东'	'[...]'
+            let value = sourceItem[key]; //'手机'    '华东'	   '[...]'
             //非数组类型直接添加到td中。
             if (!Array.isArray(value)) {
                 let td = document.createElement('td');
@@ -42,6 +42,32 @@ function renderTable(tableWrapper, data) {
                 value.forEach(number => {
                     let td = document.createElement('td');
                     td.innerHTML = number;
+
+                    //添加input输入
+                    let img = document.createElement('img');
+                    let inputNum = document.createElement('input');
+                    let inputConfirm = document.createElement('input');
+                    let inputCancel = document.createElement('input');
+
+                    img.setAttribute('src', './img/edit.png');
+                    inputNum.setAttribute('type', 'text');
+                    inputConfirm.setAttribute('type', 'button');
+                    inputCancel.setAttribute('type', 'button');
+                    inputNum.setAttribute('placeholder', number);
+                    inputConfirm.setAttribute('class', 'confirm');
+                    inputCancel.setAttribute('class', 'cancel');
+                    inputConfirm.setAttribute('value', '确定');
+                    inputCancel.setAttribute('value', '取消');
+
+                    td.appendChild(img);
+                    td.appendChild(inputNum);
+                    td.appendChild(inputConfirm);
+                    td.appendChild(inputCancel);
+
+                    [...td.childNodes].slice(2).forEach(element => {
+                        element.style.visibility = 'hidden';
+                    });
+
                     tr.appendChild(td);
                 });
             }
