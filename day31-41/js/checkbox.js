@@ -1,4 +1,3 @@
-
 function handleCheckbox(parent) {
     //首先让所有CheckBox全选
     const checkDoms = parent.querySelectorAll("input[type='checkbox']");
@@ -38,14 +37,36 @@ function handleCheckbox(parent) {
     }
 }
 
-//获取选中的checkbox的value;
-let singleCheckDoms = document.querySelectorAll("input[check-type='single']");
+
+let areaWrapper = document.querySelector('#area-wrapper');
+let areaSingles = areaWrapper.querySelectorAll("input[check-type='single']");
+let goodsWrapper = document.querySelector('#goods-wrapper');
+let goodsSingles = goodsWrapper.querySelectorAll("input[check-type='single']");
+
 function getCheckedValues() {
-    let checkedValues = [];
-    Array.prototype.slice.call(singleCheckDoms, 0).forEach(dom => {
-        if (dom.checked) {
-            checkedValues.push(dom.value);
+    let region = [];
+    let product = [];
+    [...areaSingles].slice(0).forEach(el => {
+        if(el.checked){
+            region.push(el.value);
         }
     });
-    return checkedValues;
+
+    [...goodsSingles].slice(0).forEach(el => {
+        if (el.checked) {
+            product.push(el.value);
+        }
+    });
+
+    return {
+        region,
+        product
+    }
 }
+
+//处理CheckBox
+handleCheckbox(areaWrapper);
+handleCheckbox(goodsWrapper);
+
+
+

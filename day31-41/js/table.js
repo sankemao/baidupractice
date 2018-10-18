@@ -54,6 +54,7 @@ function renderTable(tableWrapper, data) {
                     inputConfirm.setAttribute('type', 'button');
                     inputCancel.setAttribute('type', 'button');
                     inputNum.setAttribute('placeholder', number);
+                    inputNum.setAttribute('class', 'input');
                     inputConfirm.setAttribute('class', 'confirm');
                     inputCancel.setAttribute('class', 'cancel');
                     inputConfirm.setAttribute('value', '确定');
@@ -89,7 +90,7 @@ function renderTable(tableWrapper, data) {
         if (goodsSel[i].checked) goodsSelCount++;
     }
     if (areaSelCount === 1 && goodsSelCount !== 1) {
-        Array.prototype.slice.call(table.rows, 0).forEach(row => {
+        [...table.rows].slice(0).forEach(row => {
             let temp = row.cells[0].innerHTML;
             row.cells[0].innerHTML = row.cells[1].innerHTML;
             row.cells[1].innerHTML = temp;
@@ -121,4 +122,58 @@ function mergeCell(table, startRow, col) {
             break;
         }
     }
+}
+
+//数据td编辑按钮点击事件
+function handleTableEvent(tableWrapper) {
+    let preTd;
+    tableWrapper.addEventListener('click', event => {
+        let target = event.target;
+        if (!target) return;
+        let parent = target.parentNode;
+        if (target.nodeName.toUpperCase() == 'IMG') {
+            //处理pre
+            hideTdContent(preTd);
+            //处理current
+            target.style.visibility = 'hidden';
+            preTd = parent;
+            [...parent.childNodes].slice(2).forEach(item => {
+                item.style.visibility = 'visible';
+            });
+        } else if (target.className.toUpperCase() == 'CONFIRM') {
+            //check valid input
+            let inputNum = parent.childNodes[2].value;
+            if (!Number(inputNum)) {
+                alert('please input a valid number');
+                return;
+            }
+            parent.childNodes[0].textContent = inputNum;
+            hideTdContent(parent);
+            //保存数据到localStorage
+
+        } else if (target.className.toUpperCase() == 'CANCEL') {
+            hideTdContent(parent);
+        }
+    }, false);
+
+    tableWrapper.addEventListener('blur', event => {
+        let target = event.target;
+        if (!target) return;
+        if (target.className.toUpperCase() === 'INPUT') {
+            setTimeout(() => {
+                hideTdContent(preTd);
+            }, 100); 
+        }
+    }, true);
+}
+
+function hideTdContent(tdNode) {
+    if (!tdNode) return;
+    [...tdNode.childNodes].slice(1).forEach((item, index, self) => {
+        if (index === 0) {
+            item.removeAttribute('style');
+        } else {
+            item.style.visibility = 'hidden';
+        }
+    })
 }
