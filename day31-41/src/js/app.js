@@ -1,7 +1,14 @@
+import '../style/sellerCss.css';
+import Bar from './bar';
+import Line from './line';
 let selectForm = document.querySelector('.select-form');
 let tableWrapper = document.querySelector('#table-wrapper');
 let barWrapper = document.querySelector('#bar-svg');
 let lineWrapper = document.querySelector('#line-canvas');
+
+
+let bar = new Bar(barWrapper);
+let line = new Line(lineWrapper);
 
 //根据CheckBox的勾选展示表格
 selectForm.onchange = () => {
@@ -29,8 +36,8 @@ tableWrapper.onmouseover = (e) => {
         });
 
         //绘制柱状图
-        drawBar(barWrapper, data);
-        drawLine(lineWrapper, data);
+        bar.drawBar(data);
+        line.drawLine(data);
     }
 };
 

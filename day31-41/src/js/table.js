@@ -49,7 +49,7 @@ function renderTable(tableWrapper, data) {
                     let inputConfirm = document.createElement('input');
                     let inputCancel = document.createElement('input');
 
-                    img.setAttribute('src', './img/edit.png');
+                    img.setAttribute('src', './src/img/edit.png');
                     inputNum.setAttribute('type', 'text');
                     inputConfirm.setAttribute('type', 'button');
                     inputCancel.setAttribute('type', 'button');
@@ -133,7 +133,7 @@ function handleTableEvent(tableWrapper) {
         let parent = target.parentNode;
         if (target.nodeName.toUpperCase() == 'IMG') {
             //处理pre
-            hideTdContent(preTd);
+            hideEditContent(preTd);
             //处理current
             target.style.visibility = 'hidden';
             preTd = parent;
@@ -148,11 +148,11 @@ function handleTableEvent(tableWrapper) {
                 return;
             }
             parent.childNodes[0].textContent = inputNum;
-            hideTdContent(parent);
+            hideEditContent(parent);
             //保存数据到localStorage
-
+            
         } else if (target.className.toUpperCase() == 'CANCEL') {
-            hideTdContent(parent);
+            hideEditContent(parent);
         }
     }, false);
 
@@ -161,13 +161,13 @@ function handleTableEvent(tableWrapper) {
         if (!target) return;
         if (target.className.toUpperCase() === 'INPUT') {
             setTimeout(() => {
-                hideTdContent(preTd);
+                hideEditContent(preTd);
             }, 100); 
         }
     }, true);
 }
 
-function hideTdContent(tdNode) {
+function hideEditContent(tdNode) {
     if (!tdNode) return;
     [...tdNode.childNodes].slice(1).forEach((item, index, self) => {
         if (index === 0) {
