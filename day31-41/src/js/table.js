@@ -4,6 +4,8 @@
  * @param {*} data 
  */
 
+ import editIcon from '../img/edit.png';
+
 function renderTable(tableWrapper, data) {
     tableWrapper.textContent = '';
     let table = document.createElement('table');
@@ -49,7 +51,7 @@ function renderTable(tableWrapper, data) {
                     let inputConfirm = document.createElement('input');
                     let inputCancel = document.createElement('input');
 
-                    img.setAttribute('src', './src/img/edit.png');
+                    img.setAttribute('src', editIcon);
                     inputNum.setAttribute('type', 'text');
                     inputConfirm.setAttribute('type', 'button');
                     inputCancel.setAttribute('type', 'button');
@@ -176,4 +178,10 @@ function hideEditContent(tdNode) {
             item.style.visibility = 'hidden';
         }
     })
+}
+
+export default {
+    hideEditContent,
+    handleTableEvent,
+    renderTable,
 }

@@ -1,6 +1,3 @@
-export default class Data {
-
-}
 
 let sourceData = [{
     product: "手机",
@@ -40,10 +37,19 @@ let sourceData = [{
     sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
 }];
 
+export default class Data{
 
-//根据checkbox勾选过滤数据
-function getData(checkedValuesFilter) {
-    return sourceData.filter((item, index, self) => {
-        return checkedValuesFilter.indexOf(item.product) != -1 && checkedValuesFilter.indexOf(item.region) != -1;
-    });
+    constructor(){
+        
+    }
+
+    //根据checkbox勾选过滤数据
+    getData(checkedValuesFilter) {
+        return sourceData.filter((item, index, self) => {
+            return checkedValuesFilter.indexOf(item.product) != -1 && checkedValuesFilter.indexOf(item.region) != -1;
+        });
+    }
 }
+
+
+

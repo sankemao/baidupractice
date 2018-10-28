@@ -4,11 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        datasource: "./src/js/datasource.js",
-        table: "./src/js/table.js",
-        checkbox: "./src/js/checkbox.js",
-        bar: "./src/js/bar.js",
-        line: "./src/js/line.js",
         app: "./src/js/app.js",
     },
 

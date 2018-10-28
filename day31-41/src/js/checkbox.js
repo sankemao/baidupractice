@@ -37,7 +37,6 @@ function handleCheckbox(parent) {
     }
 }
 
-
 let areaWrapper = document.querySelector('#area-wrapper');
 let areaSingles = areaWrapper.querySelectorAll("input[check-type='single']");
 let goodsWrapper = document.querySelector('#goods-wrapper');
@@ -68,5 +67,8 @@ function getCheckedValues() {
 handleCheckbox(areaWrapper);
 handleCheckbox(goodsWrapper);
 
-
+export default {
+    handleCheckbox,
+    getCheckedValues,
+}
 
