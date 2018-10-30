@@ -1,7 +1,7 @@
 import '../style/app.css';
 import Bar from './bar';
 import Line from './line';
-import Data from './datasource';
+import dataCenter from './datasource';
 import checkbox from './checkbox';
 import table from './table';
 
@@ -13,17 +13,16 @@ let lineWrapper = document.querySelector('#line-canvas');
 
 let bar = new Bar(barWrapper);
 let line = new Line(lineWrapper);
-let dataSource = new Data();
 
 //根据CheckBox的勾选展示表格
 selectForm.onchange = () => {
     let selectAll = checkbox.getCheckedValues();
-    let selectedData = dataSource.getData(selectAll.product.concat(selectAll.region));
+    let selectedData = dataCenter.getData(selectAll.product.concat(selectAll.region));
     table.renderTable(tableWrapper, selectedData);
 };
 
 //渲染表格
-let selectedData = dataSource.getData(checkbox.getCheckedValues().product.concat(checkbox.getCheckedValues().region));
+let selectedData = dataCenter.getData(checkbox.getCheckedValues().product.concat(checkbox.getCheckedValues().region));
 table.renderTable(tableWrapper, selectedData);
 
 //开始处理图表

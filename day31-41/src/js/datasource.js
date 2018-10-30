@@ -1,4 +1,3 @@
-
 let sourceData = [{
     product: "手机",
     region: "华东",
@@ -37,19 +36,30 @@ let sourceData = [{
     sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
 }];
 
-export default class Data{
-
-    constructor(){
-        
-    }
-
-    //根据checkbox勾选过滤数据
-    getData(checkedValuesFilter) {
-        return sourceData.filter((item, index, self) => {
-            return checkedValuesFilter.indexOf(item.product) != -1 && checkedValuesFilter.indexOf(item.region) != -1;
-        });
-    }
+//根据checkbox勾选过滤数据
+function getData(checkedValuesFilter) {
+    console.log('获取数据');
+    sourceData = JSON.parse(localStorage.getItem("allData")) || sourceData;
+    return sourceData.filter((item, index, self) => {
+        return checkedValuesFilter.indexOf(item.product) != -1 && checkedValuesFilter.indexOf(item.region) != -1;
+    });
 }
 
+//保存到浏览器
+function saveCurrentData(product, region, sale) {    
+    let newData = sourceData.map(obj => {
+        if (obj.product == product && obj.region == region) {
+            console.log('执行了')
+            obj.sale = sale;
+        }
+        return obj;
+    });
 
+    localStorage.setItem("allData", JSON.stringify(newData));
+    console.log(newData);
+}
 
+export default {
+    getData,
+    saveCurrentData,
+}

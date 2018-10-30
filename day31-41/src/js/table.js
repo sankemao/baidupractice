@@ -4,7 +4,9 @@
  * @param {*} data 
  */
 
- import editIcon from '../img/edit.png';
+import editIcon from '../img/edit.png';
+import dataCenter from './datasource';
+
 
 function renderTable(tableWrapper, data) {
     tableWrapper.textContent = '';
@@ -152,7 +154,21 @@ function handleTableEvent(tableWrapper) {
             parent.childNodes[0].textContent = inputNum;
             hideEditContent(parent);
             //保存数据到localStorage
-            
+            let tdDom = parent.parentNode;
+            let product;
+            let region;
+            let sale = [];
+            [...tdDom.childNodes].slice(0).forEach((item,idx,self) => {
+                let txt = item.textContent;
+                if(idx == 0){
+                    product = txt;
+                }else if(idx == 1){
+                    region = txt;
+                }else{
+                    sale.push(txt);
+                }
+            });
+            dataCenter.saveCurrentData(product, region, sale);
         } else if (target.className.toUpperCase() == 'CANCEL') {
             hideEditContent(parent);
         }
@@ -164,7 +180,7 @@ function handleTableEvent(tableWrapper) {
         if (target.className.toUpperCase() === 'INPUT') {
             setTimeout(() => {
                 hideEditContent(preTd);
-            }, 100); 
+            }, 100);
         }
     }, true);
 }
