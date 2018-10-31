@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="a">A</button>
+    <button id="b">B</button>
+    <button id="c">C</button>
+    <div id="cont"></div>
+
+    <script>
+        let btnDomArray = document.querySelectorAll("button");
+        let cont = document.querySelector("#cont");
+        [...btnDomArray].slice(0).forEach(dom => {
+            dom.onclick = (event) => {
+                //设置新的hash
+                window.location.hash = dom.innerText;
+            };
+        })
+
+        function parseHash() {
+            return window.location.hash;    
+        }
+
+        function renderHash(){
+            let hash = parseHash();
+            cont.innerHTML = hash;
+        }
+
+        window.onhashchange = renderHash;
+        renderHash();
+    </script>
+</body>
+
+</html>
