@@ -1,15 +1,21 @@
-function handleCheckbox(parent) {
-    //首先让所有CheckBox全选
-    const checkDoms = parent.querySelectorAll("input[type='checkbox']");
-    const checkAllDom = parent.querySelector("input[check-type='all']");
-    const checkChildDoms = parent.querySelectorAll("input[check-type='single']");
+let areaWrapper = document.querySelector('#area-wrapper');
+let goodsWrapper = document.querySelector('#goods-wrapper');
+let allCheckboxes = document.querySelectorAll("input[type=checkbox]");
 
-    checkDoms.forEach(element => {
+let goodsSingles = goodsWrapper.querySelectorAll("input[check-type='single']");
+let areaSingles = areaWrapper.querySelectorAll("input[check-type='single']");
+
+function handleCheckbox(checkWrapper) {
+    //首先让所有CheckBox全选
+    const checkAllDom = checkWrapper.querySelector("input[check-type='all']");
+    const checkChildDoms = checkWrapper.querySelectorAll("input[check-type='single']");
+    checkAllDom.checked = true;
+    checkChildDoms.forEach(element => {
         element.checked = true;
     });
 
-    //CheckBox点击事件
-    parent.onclick = (e) => {
+    //处理CheckBox点击选中状态
+    checkWrapper.onclick = (e) => {
         let target = e.target;
         if (target.getAttribute('type') === 'checkbox') {
             let checkCount = 0;
@@ -23,7 +29,7 @@ function handleCheckbox(parent) {
                 let childCheckedCount = 0;
                 checkChildDoms.forEach(item => {
                     if (item.checked) {
-                        checkCount ++;
+                        checkCount++;
                     }
                 });
                 //不允许一个都不选
@@ -33,42 +39,57 @@ function handleCheckbox(parent) {
                 //处理全选按钮
                 checkAllDom.checked = checkCount === checkChildDoms.length;
             }
+
+            //将新状态pushState
+            let str = '?' + getState();
+            history.pushState("state", null, str);
         }
     }
+
+    //处理默认的state,浏览器进入 replacestate
+    history.replaceState("state", null, '?' + getState());
 }
 
-let areaWrapper = document.querySelector('#area-wrapper');
-let areaSingles = areaWrapper.querySelectorAll("input[check-type='single']");
-let goodsWrapper = document.querySelector('#goods-wrapper');
-let goodsSingles = goodsWrapper.querySelectorAll("input[check-type='single']");
-
-function getCheckedValues() {
-    let region = [];
-    let product = [];
-    [...areaSingles].slice(0).forEach(el => {
-        if(el.checked){
-            region.push(el.value);
-        }
-    });
-
-    [...goodsSingles].slice(0).forEach(el => {
-        if (el.checked) {
-            product.push(el.value);
-        }
-    });
-
-    return {
-        region,
-        product
-    }
-}
-
-//处理CheckBox
 handleCheckbox(areaWrapper);
 handleCheckbox(goodsWrapper);
 
-export default {
-    handleCheckbox,
-    getCheckedValues,
+function getCheckedValues() {
+    let selected = [];
+    allCheckboxes.forEach(el => {
+        if(el.checked){
+            selected.push(el.value);
+        }
+    });
+    return selected;
 }
 
+
+function getState() {
+    let str = "";
+    allCheckboxes.forEach(el => {
+        if (el.checked) {
+            str += "1";
+        } else {
+            str += "0";
+        }
+    });
+
+    return str;
+}
+
+function setState() {
+    let arr = location.search.slice(1).split("");
+    allCheckboxes.forEach((el, idx) => {
+        if (arr[idx] === "1") {
+            el.checked = true;
+        } else {
+            el.checked = false;
+        }
+    })
+}
+
+
+export default {
+    getCheckedValues,
+    setState,
+}

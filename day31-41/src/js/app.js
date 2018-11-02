@@ -7,23 +7,30 @@ import table from './table';
 
 let selectForm = document.querySelector('.select-form');
 let tableWrapper = document.querySelector('#table-wrapper');
+
+
 let barWrapper = document.querySelector('#bar-svg');
 let lineWrapper = document.querySelector('#line-canvas');
-
-
 let bar = new Bar(barWrapper);
 let line = new Line(lineWrapper);
 
+let renderTable = function () {
+    let selectedData = dataCenter.getData(checkbox.getCheckedValues());
+    table.renderTable(tableWrapper, selectedData);
+}
+
 //根据CheckBox的勾选展示表格
 selectForm.onchange = () => {
-    let selectAll = checkbox.getCheckedValues();
-    let selectedData = dataCenter.getData(selectAll.product.concat(selectAll.region));
-    table.renderTable(tableWrapper, selectedData);
+    renderTable();
 };
 
-//渲染表格
-let selectedData = dataCenter.getData(checkbox.getCheckedValues().product.concat(checkbox.getCheckedValues().region));
-table.renderTable(tableWrapper, selectedData);
+window.addEventListener("popstate", (pe) => {
+    checkbox.setState();
+    //重新绘制界面
+    renderTable();
+});
+
+renderTable();
 
 //开始处理图表
 tableWrapper.onmouseover = (e) => {
@@ -34,7 +41,7 @@ tableWrapper.onmouseover = (e) => {
         let data = [];
         [...parent.childNodes].slice(0).forEach(child => {
             let numData = Number(child.innerText);
-            if(numData){
+            if (numData) {
                 data.push(numData);
             }
         });

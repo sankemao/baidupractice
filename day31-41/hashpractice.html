@@ -14,27 +14,64 @@
     <button id="c">C</button>
     <div id="cont"></div>
 
-    <script>
+    <!-- <script>
         let btnDomArray = document.querySelectorAll("button");
         let cont = document.querySelector("#cont");
-        [...btnDomArray].slice(0).forEach(dom => {
+        btnDomArray.forEach(dom => {
             dom.onclick = (event) => {
                 //设置新的hash
                 window.location.hash = dom.innerText;
             };
-        })
+        });
 
         function parseHash() {
-            return window.location.hash;    
+            return window.location.hash;
         }
 
-        function renderHash(){
+        function renderHash() {
             let hash = parseHash();
             cont.innerHTML = hash;
         }
 
-        window.onhashchange = renderHash;
+        window.addEventListener('hashchange', renderHash, false);
         renderHash();
+    </script> -->
+
+    <script>
+        let btnDomArray = document.querySelectorAll("button");
+        let cont = document.querySelector("#cont");
+        btnDomArray.forEach(dom => {
+            dom.onclick = (event) => {
+                performClick(event);
+            };
+        });
+
+
+        function performClick(event) {
+            let target = event ? event.target : btnDomArray[0];
+            let str = '?' + target.innerText;
+            history.pushState(target.innerText, null, str);
+            triggerState();
+        }
+
+        function triggerState() {
+            let search = location.search;
+            if (search == '') {
+                let str = btnDomArray[0].innerText;
+                history.replaceState(str, null, '?' + str);
+                cont.innerText = str;
+            } else {
+                let str = location.search.slice(1);
+                cont.innerText = str;
+            }
+        }
+
+        if (history.pushState) {
+            window.addEventListener('popstate', () => {
+                triggerState()
+            });
+            triggerState();
+        }
     </script>
 </body>
 
